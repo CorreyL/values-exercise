@@ -28,3 +28,9 @@ A nice distinction between a `Value` and its `Descriptor` is that each `Value` i
 lowercase, and always follow a `Value`, so I wrote a quick Python script to group `Values` with their `Descriptors`:
 
 [group-values-and-descriptors.py](./group-values-and-descriptors.py)
+
+## Final Result
+
+Took about 2-3 minutes to hand edit the JSON to reconcile missing data, but the conversion was mostly clean otherwise:
+
+[values-and-descriptors.json](./intermediate-files-for-posterity/values-and-descriptors.json)
