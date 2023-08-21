@@ -21,3 +21,10 @@ The conversion from PDF to XLSX wasn't completely clean, since each cell in the 
 `Descriptors` giving more explanation to a particular `Value`. Some `Descriptors` spanned multiple lines, some didn't
 make it in the conversion. But, I could at least script building most of it into a dictionary, then fix up the few that
 didn't quite convert cleanly by hand
+
+## CSV to JSON
+
+A nice distinction between a `Value` and its `Descriptor` is that each `Value` is capitalized, and `Descriptors` are in
+lowercase, and always follow a `Value`, so I wrote a quick Python script to group `Values` with their `Descriptors`:
+
+[group-values-and-descriptors.py](./group-values-and-descriptors.py)
