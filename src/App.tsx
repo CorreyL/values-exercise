@@ -4,6 +4,8 @@ import {
 } from 'react'
 import Value from './components/Value';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
 import './App.css'
@@ -17,6 +19,12 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
+
+const columns: Array<string> = [
+  'Very Important',
+  'Important',
+  'Not Important',
+];
 
 function App() {
   const [ values ] = useState<ValuesAndDescriptors>(valuesJson);
@@ -39,6 +47,21 @@ function App() {
           value={randomValue}
           descriptor={values[randomValue]}
         />
+        <Stack
+          justifyContent="center"
+          direction="row"
+          spacing={2}
+        >
+          <Button variant="contained" color="success">
+            {columns[0]}
+          </Button>
+          <Button variant="contained" color="secondary">
+            {columns[1]}
+          </Button>
+          <Button variant="contained" color="error">
+            {columns[2]}
+          </Button>
+        </Stack>
       </main>
     </ThemeProvider>
   )
