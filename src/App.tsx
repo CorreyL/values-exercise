@@ -84,15 +84,16 @@ function App() {
     ['veryImportantValues', 'importantValues', 'notImportantValues'].forEach(column => {
       const savedColumn = localStorage.getItem(column);
       if (savedColumn) {
+        const parsedColumn = JSON.parse(savedColumn);
         switch(column) {
           case 'veryImportantValues':
-            setVeryImportantValues(JSON.parse(savedColumn));
+            setVeryImportantValues(parsedColumn);
             break;
           case 'importantValues':
-            setImportantValues(JSON.parse(savedColumn));
+            setImportantValues(parsedColumn);
             break;
           case 'notImportantValues':
-            setNotImportantValues(JSON.parse(savedColumn));
+            setNotImportantValues(parsedColumn);
             break;
         }
       }
