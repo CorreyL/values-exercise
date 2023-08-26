@@ -81,6 +81,32 @@ function App() {
   const [ randomValue, setRandomValue ] = useState<string>('');
 
   useEffect(() => {
+    ['veryImportantValues', 'importantValues', 'notImportantValues'].forEach(column => {
+      const savedColumn = localStorage.getItem(column);
+      if (savedColumn) {
+        switch(column) {
+          case 'veryImportantValues':
+            setVeryImportantValues(JSON.parse(savedColumn));
+            break;
+          case 'importantValues':
+            setImportantValues(JSON.parse(savedColumn));
+            break;
+          case 'notImportantValues':
+            setNotImportantValues(JSON.parse(savedColumn));
+            break;
+        }
+      }
+    });
+    // Remove duplicates
+    const removeDuplicates = (value: string) => {
+      setValues(state => {
+        delete state[value];
+        return state;
+      });
+    };
+    Object.keys(veryImportantValues).forEach(removeDuplicates);
+    Object.keys(importantValues).forEach(removeDuplicates);
+    Object.keys(notImportantValues).forEach(removeDuplicates);
     getNewValue(values, setRandomValue);
   }, []);
 
@@ -88,6 +114,23 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main>
+        <Stack
+          justifyContent="center"
+          direction="row"
+          spacing={2}
+        >
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              localStorage.setItem('veryImportantValues', JSON.stringify(veryImportantValues));
+              localStorage.setItem('importantValues', JSON.stringify(importantValues));
+              localStorage.setItem('notImportantValues', JSON.stringify(notImportantValues));
+            }}
+          >
+            Save Progress
+          </Button>
+        </Stack>
         <Value
           value={randomValue}
           descriptor={values[randomValue]}
