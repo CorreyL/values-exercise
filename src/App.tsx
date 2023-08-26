@@ -29,6 +29,33 @@ const columns: Array<string> = [
   'Not Important',
 ];
 
+/**
+ * Delete the chosen Value from the original set of Values and sort it into
+ * the chosen Column
+ *
+ * @param value The Value chosen
+ * @param originalValues The Object holding all unchosen Values
+ * @param originalValuesSetter The Setter for the Object holding all unchosen
+ * Values
+ * @param setter The Setter for the Column that the Value will be sorted into
+ */
+const handleChosenValue = (
+  value: string,
+  originalValues: ValuesAndDescriptors,
+  originalValuesSetter: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>,
+  setter: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>,
+): void => {
+  const descriptor: string = originalValues[value];
+  originalValuesSetter(state => {
+    delete state[value];
+    return state;
+  });
+  setter(state => ({
+    ...state,
+    [value]: descriptor,
+  }));
+};
+
 const getNewValue = (
   values: ValuesAndDescriptors,
   setter: React.Dispatch<React.SetStateAction<string>>
