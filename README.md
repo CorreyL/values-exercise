@@ -12,3 +12,8 @@ by printing the papers and cutting them up, I thought it might be a good excuse 
 * Understand where the [React landscape is at in 2023](https://www.robinwieruch.de/react-starter/)
 * Try out a new framework like [Tailwind CSS](https://tailwindcss.com/)
 * Enhance the exercise by eventually building a means of being able to compare answers with another user
+
+# Ideas
+
+* Functionality to `Lock`/`Unlock` a Value, to mark it as something the user definitely knows they want to stay in a
+particular column
