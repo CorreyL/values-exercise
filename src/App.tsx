@@ -3,7 +3,7 @@ import {
   useState,
 } from 'react'
 import Value from './components/Value';
-import ValuesColumn from './components/ValuesColumn/ValuesColumn';
+import ValuesColumn from './components/ValuesColumn';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
