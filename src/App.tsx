@@ -69,6 +69,11 @@ function App() {
   const [ veryImportantValues, setVeryImportantValues ] = useState<ValuesAndDescriptors>({});
   const [ importantValues, setImportantValues ] = useState<ValuesAndDescriptors>({});
   const [ notImportantValues, setNotImportantValues ] = useState<ValuesAndDescriptors>({});
+  const columnsTitleToStateMapping = {
+    [columns[0]]: { state: veryImportantValues, setter: setVeryImportantValues },
+    [columns[1]]: { state: importantValues, setter: setImportantValues },
+    [columns[2]]: { state: notImportantValues, setter: setNotImportantValues },
+  };
   /**
    * @todo Remove random choosing of value once choice and storing is
    * implemented
@@ -130,6 +135,8 @@ function App() {
                 <ValuesColumn
                   key={`column-${idx}`}
                   columnTitle={columnTitle}
+                  values={columnsTitleToStateMapping[columnTitle].state}
+                  columnSetter={columnsTitleToStateMapping[columnTitle].setter}
                 />
               ))
             }
