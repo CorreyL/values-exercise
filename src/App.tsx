@@ -2,6 +2,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+import Value from './components/Value';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
@@ -34,7 +35,10 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main>
-        Hello World!
+        <Value
+          value={randomValue}
+          descriptor={values[randomValue]}
+        />
       </main>
     </ThemeProvider>
   )
