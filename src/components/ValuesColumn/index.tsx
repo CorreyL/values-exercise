@@ -1,3 +1,3 @@
-import Value from './ValuesColumn';
+import ValuesColumn from './ValuesColumn';
 
-export default Value;
+export default ValuesColumn;
