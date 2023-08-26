@@ -3,8 +3,11 @@ import {
   useState,
 } from 'react'
 import Value from './components/Value';
+import ValuesColumn from './components/ValuesColumn/ValuesColumn';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
@@ -62,6 +65,17 @@ function App() {
             {columns[2]}
           </Button>
         </Stack>
+        <Box>
+          <Grid container spacing={2}>
+            {
+              columns.map(columnTitle => (
+                <ValuesColumn
+                  columnTitle={columnTitle}
+                />
+              ))
+            }
+          </Grid>
+        </Box>
       </main>
     </ThemeProvider>
   )
