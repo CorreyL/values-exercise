@@ -13,7 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
 import './App.css'
 
-type ValuesAndDescriptors = {
+export type ValuesAndDescriptors = {
   [value: string]: string;
 }
 
