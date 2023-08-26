@@ -65,7 +65,10 @@ const getNewValue = (
 };
 
 function App() {
-  const [ values ] = useState<ValuesAndDescriptors>(valuesJson);
+  const [ values, setValues ] = useState<ValuesAndDescriptors>(valuesJson);
+  const [ veryImportantValues, setVeryImportantValues ] = useState<ValuesAndDescriptors>({});
+  const [ importantValues, setImportantValues ] = useState<ValuesAndDescriptors>({});
+  const [ notImportantValues, setNotImportantValues ] = useState<ValuesAndDescriptors>({});
   /**
    * @todo Remove random choosing of value once choice and storing is
    * implemented
@@ -89,13 +92,34 @@ function App() {
           direction="row"
           spacing={2}
         >
-          <Button variant="contained" color="success">
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              handleChosenValue(randomValue, values, setValues, setVeryImportantValues);
+              getNewValue(values, setRandomValue);
+            }}
+          >
             {columns[0]}
           </Button>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              handleChosenValue(randomValue, values, setValues, setImportantValues);
+              getNewValue(values, setRandomValue);
+            }}
+          >
             {columns[1]}
           </Button>
-          <Button variant="contained" color="error">
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => {
+              handleChosenValue(randomValue, values, setValues, setNotImportantValues);
+              getNewValue(values, setRandomValue);
+            }}
+          >
             {columns[2]}
           </Button>
         </Stack>
