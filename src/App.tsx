@@ -81,10 +81,18 @@ function App() {
   const [ randomValue, setRandomValue ] = useState<string>('');
 
   useEffect(() => {
+    // Remove duplicates
+    const removeDuplicates = (value: string) => {
+      setValues(state => {
+        delete state[value];
+        return state;
+      });
+    };
     ['veryImportantValues', 'importantValues', 'notImportantValues'].forEach(column => {
       const savedColumn = localStorage.getItem(column);
       if (savedColumn) {
         const parsedColumn = JSON.parse(savedColumn);
+        Object.keys(parsedColumn).forEach(removeDuplicates);
         switch(column) {
           case 'veryImportantValues':
             setVeryImportantValues(parsedColumn);
@@ -98,16 +106,6 @@ function App() {
         }
       }
     });
-    // Remove duplicates
-    const removeDuplicates = (value: string) => {
-      setValues(state => {
-        delete state[value];
-        return state;
-      });
-    };
-    Object.keys(veryImportantValues).forEach(removeDuplicates);
-    Object.keys(importantValues).forEach(removeDuplicates);
-    Object.keys(notImportantValues).forEach(removeDuplicates);
     getNewValue(values, setRandomValue);
   }, []);
 
