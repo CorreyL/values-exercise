@@ -33,7 +33,7 @@ export default function ValuesColumn({
       }}
     >
       <Typography variant="h4" component="div">
-        {columnTitle}
+        {columnTitle} ({Object.keys(values).length})
       </Typography>
       {
         Object.keys(values).map((value, idx) => (
