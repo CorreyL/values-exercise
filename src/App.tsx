@@ -29,6 +29,14 @@ const columns: Array<string> = [
   'Not Important',
 ];
 
+const getNewValue = (
+  values: ValuesAndDescriptors,
+  setter: React.Dispatch<React.SetStateAction<string>>
+): void => {
+  const valuesKeys: Array<string> = Object.keys(values);
+  setter(valuesKeys[Math.floor(Math.random() * valuesKeys.length)]);
+};
+
 function App() {
   const [ values ] = useState<ValuesAndDescriptors>(valuesJson);
   /**
@@ -38,8 +46,7 @@ function App() {
   const [ randomValue, setRandomValue ] = useState<string>('');
 
   useEffect(() => {
-    const valuesKeys: Array<string> = Object.keys(values);
-    setRandomValue(valuesKeys[Math.floor(Math.random() * valuesKeys.length)]);
+    getNewValue(values, setRandomValue);
   }, []);
 
   return (
