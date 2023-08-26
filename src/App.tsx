@@ -68,8 +68,9 @@ function App() {
         <Box>
           <Grid container spacing={2}>
             {
-              columns.map(columnTitle => (
+              columns.map((columnTitle, idx) => (
                 <ValuesColumn
+                  key={`column-${idx}`}
                   columnTitle={columnTitle}
                 />
               ))
