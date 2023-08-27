@@ -86,7 +86,7 @@ function App() {
 
   useEffect(() => {
     // Remove duplicates
-    const initialValues: ValuesAndDescriptors = valuesJson;
+    const initialValues: ValuesAndDescriptors = JSON.parse(JSON.stringify(valuesJson));
     const removeDuplicates = (value: string) => {
       delete initialValues[value];
     };
