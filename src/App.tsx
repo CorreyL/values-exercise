@@ -136,46 +136,52 @@ function App() {
             Save Progress
           </Button>
         </Stack>
-        <Value
-          value={randomValue}
-          descriptor={values[randomValue]}
-        />
-        <Stack
-          justifyContent="center"
-          direction="row"
-          spacing={2}
-        >
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => {
-              handleChosenValue(randomValue, values, setValues, setVeryImportantValues);
-              getNewValue(values, setRandomValue);
-            }}
-          >
-            {columns[0]}
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              handleChosenValue(randomValue, values, setValues, setImportantValues);
-              getNewValue(values, setRandomValue);
-            }}
-          >
-            {columns[1]}
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => {
-              handleChosenValue(randomValue, values, setValues, setNotImportantValues);
-              getNewValue(values, setRandomValue);
-            }}
-          >
-            {columns[2]}
-          </Button>
-        </Stack>
+        {(randomValue !== '')
+          && (
+            <>
+              <Value
+                value={randomValue}
+                descriptor={values[randomValue]}
+              />
+              <Stack
+                justifyContent="center"
+                direction="row"
+                spacing={2}
+              >
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={() => {
+                    handleChosenValue(randomValue, values, setValues, setVeryImportantValues);
+                    getNewValue(values, setRandomValue);
+                  }}
+                >
+                  {columns[0]}
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    handleChosenValue(randomValue, values, setValues, setImportantValues);
+                    getNewValue(values, setRandomValue);
+                  }}
+                >
+                  {columns[1]}
+                </Button>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => {
+                    handleChosenValue(randomValue, values, setValues, setNotImportantValues);
+                    getNewValue(values, setRandomValue);
+                  }}
+                >
+                  {columns[2]}
+                </Button>
+              </Stack>
+            </>
+          )
+        }
         <Box>
           <Grid container spacing={2}>
             {
