@@ -51,13 +51,13 @@ export default function ValuesColumn({
               /**
                * @todo Need to determine if it was actually dropped in a
                * droppable zone, otherwise it'll just get deleted
-               *
-               * Also need to figure out why the state change doesn't
-               * immediately update the render for this column
                */
               columnSetter(state => {
-                delete state[value];
-                return state;
+                const {
+                  [value]: valueToDelete,
+                  ...rest
+                } = state;
+                return rest;
               });
             }}
           />
