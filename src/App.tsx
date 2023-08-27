@@ -135,6 +135,58 @@ function App() {
           >
             Save Progress
           </Button>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              localStorage.setItem('veryImportantValues', JSON.stringify(veryImportantValues));
+              localStorage.setItem('importantValues', JSON.stringify(importantValues));
+              localStorage.setItem('notImportantValues', JSON.stringify(notImportantValues));
+              const jsonToSave = {
+                'veryImportantValues': veryImportantValues,
+                'importantValues': importantValues,
+                'notImportantValues': notImportantValues,
+              };
+              const element = document.createElement('a');
+              const textFile = new Blob([JSON.stringify(jsonToSave)], {type: 'text/plain'});
+              element.href = URL.createObjectURL(textFile);
+              element.download = 'values.json';
+              document.body.appendChild(element); 
+              element.click();
+              element.remove();
+            }}
+          >
+            Save Progress To File
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              const input = document.createElement('input');
+              input.type = 'file';
+              document.body.appendChild(input);
+              input.click();
+              input.onchange = (event) => {
+                const fileReader = new FileReader();
+                if (event?.target && (event.target as HTMLInputElement).files?.length) {
+                  // Typescript is not recognizing that event and target have
+                  // already been null-checked, begrudgingly ts-ignore
+                  // @ts-ignore
+                  fileReader.readAsText(event.target.files[0], 'UTF-8');
+                  fileReader.onload = (event) => {
+                    if (event?.target?.result) {
+                      const parsedLoadedFile = JSON.parse(event.target.result as string);
+                      setVeryImportantValues(parsedLoadedFile['veryImportantValues']);
+                      setImportantValues(parsedLoadedFile['importantValues']);
+                      setNotImportantValues(parsedLoadedFile['notImportantValues']);
+                    }
+                  }
+                }
+              };
+            }}
+          >
+            Load Progress From File
+          </Button>
         </Stack>
         {(randomValue !== '')
           && (
