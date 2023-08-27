@@ -29,6 +29,12 @@ const columns: Array<string> = [
   'Not Important',
 ];
 
+const columnKeys = {
+  VERY_IMPORTANT_VALUES: 'veryImportantValues',
+  IMPORTANT_VALUES: 'importantValues',
+  NOT_IMPORTANT_VALUES: 'notImportantValues',
+};
+
 /**
  * Delete the chosen Value from the original set of Values and sort it into
  * the chosen Column
@@ -90,19 +96,23 @@ function App() {
     const removeDuplicates = (value: string) => {
       delete initialValues[value];
     };
-    ['veryImportantValues', 'importantValues', 'notImportantValues'].forEach(column => {
+    [
+      columnKeys.VERY_IMPORTANT_VALUES,
+      columnKeys.IMPORTANT_VALUES,
+      columnKeys.NOT_IMPORTANT_VALUES
+    ].forEach(column => {
       const savedColumn = localStorage.getItem(column);
       if (savedColumn) {
         const parsedColumn = JSON.parse(savedColumn);
         Object.keys(parsedColumn).forEach(removeDuplicates);
         switch(column) {
-          case 'veryImportantValues':
+          case columnKeys.VERY_IMPORTANT_VALUES:
             setVeryImportantValues(parsedColumn);
             break;
-          case 'importantValues':
+          case columnKeys.IMPORTANT_VALUES:
             setImportantValues(parsedColumn);
             break;
-          case 'notImportantValues':
+          case columnKeys.NOT_IMPORTANT_VALUES:
             setNotImportantValues(parsedColumn);
             break;
         }
@@ -128,9 +138,9 @@ function App() {
             variant="contained"
             color="success"
             onClick={() => {
-              localStorage.setItem('veryImportantValues', JSON.stringify(veryImportantValues));
-              localStorage.setItem('importantValues', JSON.stringify(importantValues));
-              localStorage.setItem('notImportantValues', JSON.stringify(notImportantValues));
+              localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
+              localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
+              localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
             }}
           >
             Save Progress
@@ -139,13 +149,13 @@ function App() {
             variant="contained"
             color="success"
             onClick={() => {
-              localStorage.setItem('veryImportantValues', JSON.stringify(veryImportantValues));
-              localStorage.setItem('importantValues', JSON.stringify(importantValues));
-              localStorage.setItem('notImportantValues', JSON.stringify(notImportantValues));
+              localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
+              localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
+              localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
               const jsonToSave = {
-                'veryImportantValues': veryImportantValues,
-                'importantValues': importantValues,
-                'notImportantValues': notImportantValues,
+                [columnKeys.VERY_IMPORTANT_VALUES]: veryImportantValues,
+                [columnKeys.IMPORTANT_VALUES]: importantValues,
+                [columnKeys.NOT_IMPORTANT_VALUES]: notImportantValues,
               };
               const element = document.createElement('a');
               const textFile = new Blob([JSON.stringify(jsonToSave)], {type: 'text/plain'});
@@ -176,9 +186,9 @@ function App() {
                   fileReader.onload = (event) => {
                     if (event?.target?.result) {
                       const parsedLoadedFile = JSON.parse(event.target.result as string);
-                      setVeryImportantValues(parsedLoadedFile['veryImportantValues']);
-                      setImportantValues(parsedLoadedFile['importantValues']);
-                      setNotImportantValues(parsedLoadedFile['notImportantValues']);
+                      setVeryImportantValues(parsedLoadedFile[columnKeys.VERY_IMPORTANT_VALUES]);
+                      setImportantValues(parsedLoadedFile[columnKeys.IMPORTANT_VALUES]);
+                      setNotImportantValues(parsedLoadedFile[columnKeys.NOT_IMPORTANT_VALUES]);
                     }
                   }
                 }
