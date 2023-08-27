@@ -17,3 +17,5 @@ by printing the papers and cutting them up, I thought it might be a good excuse 
 
 * Functionality to `Lock`/`Unlock` a Value, to mark it as something the user definitely knows they want to stay in a
 particular column
+* History of where Values were moved
+Might help users see which Values they struggled with keeping in a particular column
