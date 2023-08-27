@@ -61,11 +61,15 @@ const getNewValue = (
   setter: React.Dispatch<React.SetStateAction<string>>
 ): void => {
   const valuesKeys: Array<string> = Object.keys(values);
+  if (!valuesKeys.length) {
+    setter('');
+    return;
+  }
   setter(valuesKeys[Math.floor(Math.random() * valuesKeys.length)]);
 };
 
 function App() {
-  const [ values, setValues ] = useState<ValuesAndDescriptors>(valuesJson);
+  const [ values, setValues ] = useState<ValuesAndDescriptors>({});
   const [ veryImportantValues, setVeryImportantValues ] = useState<ValuesAndDescriptors>({});
   const [ importantValues, setImportantValues ] = useState<ValuesAndDescriptors>({});
   const [ notImportantValues, setNotImportantValues ] = useState<ValuesAndDescriptors>({});
@@ -82,11 +86,9 @@ function App() {
 
   useEffect(() => {
     // Remove duplicates
+    const initialValues: ValuesAndDescriptors = valuesJson;
     const removeDuplicates = (value: string) => {
-      setValues(state => {
-        delete state[value];
-        return state;
-      });
+      delete initialValues[value];
     };
     ['veryImportantValues', 'importantValues', 'notImportantValues'].forEach(column => {
       const savedColumn = localStorage.getItem(column);
@@ -106,8 +108,12 @@ function App() {
         }
       }
     });
-    getNewValue(values, setRandomValue);
+    setValues(initialValues);
   }, []);
+
+  useEffect(() => {
+    getNewValue(values, setRandomValue);
+  }, [values]);
 
   return (
     <ThemeProvider theme={darkTheme}>
