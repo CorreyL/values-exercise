@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import './Value.css';
 
 interface ValueProps {
   value: string;
@@ -68,7 +69,14 @@ export default function Value({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
-      <Card variant="outlined">
+      <Card
+        variant="outlined"
+        className={
+          isLocked
+            ? 'locked-value'
+            : ''
+        }
+      >
         <CardContent>
           <Typography variant="h5" component="div">
             {value}
