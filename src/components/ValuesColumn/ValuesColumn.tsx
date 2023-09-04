@@ -2,7 +2,7 @@ import { DragEvent, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Value from '../Value';
-import { ValuesAndDescriptors } from '../../App';
+import { columns, ValuesAndDescriptors } from '../../App';
 
 interface ValuesColumnProps {
   columnTitle: string,
@@ -33,7 +33,19 @@ export default function ValuesColumn({
       }}
     >
       <Typography variant="h4" component="div">
-        {columnTitle} ({Object.keys(values).length})
+        {columnTitle} (
+          <span
+            style={
+              (
+                columnTitle === columns[0] && Object.keys(values).length > 12
+                  ? {color: 'red'}
+                  : {}
+              )
+            }
+          >
+            {Object.keys(values).length}
+          </span>
+        )
       </Typography>
       {
         Object.keys(values).map((value, idx) => (

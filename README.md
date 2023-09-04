@@ -1,6 +1,8 @@
 # values-exercise
 An excuse to turn a simple therapy exercise into a means of sharpening my programming skills.
 
+The exercise becomes most effective with the restriction that the `Very Important` is only limited to 12 choices.
+
 # Preamble
 
 I was recommended the exercise found in [misc/Valuescards.pdf](misc/Valuescards.pdf), and while it's supposed to be done

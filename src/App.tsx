@@ -23,7 +23,7 @@ const darkTheme = createTheme({
   },
 });
 
-const columns: Array<string> = [
+export const columns: Array<string> = [
   'Very Important',
   'Important',
   'Not Important',
