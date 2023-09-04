@@ -8,12 +8,19 @@ interface ValuesColumnProps {
   columnTitle: string,
   columnSetter: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>,
   values: ValuesAndDescriptors,
+  /**
+   * @todo Refactor to use Context to avoid Prop Drilling
+   */
+  lockedValues: Array<string>,
+  setLockedValues: React.Dispatch<React.SetStateAction<Array<string>>>,
 };
 
 export default function ValuesColumn({
   columnTitle,
   columnSetter,
   values,
+  lockedValues,
+  setLockedValues,
 }: ValuesColumnProps) {
   useEffect(() => {}, [values]);
   return (
@@ -72,6 +79,8 @@ export default function ValuesColumn({
                 return rest;
               });
             }}
+            lockedValues={lockedValues}
+            setLockedValues={setLockedValues}
           />
         ))
       }

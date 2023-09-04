@@ -9,6 +9,11 @@ interface ValueProps {
   draggable?: boolean;
   onDragStart?: any;
   onDragEnd?: any;
+  /**
+   * @todo Refactor Value component to make these optional props
+   */
+  lockedValues: Array<string>,
+  setLockedValues: React.Dispatch<React.SetStateAction<Array<string>>>,
 };
 
 export default function Value({

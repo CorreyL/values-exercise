@@ -212,6 +212,11 @@ function App() {
               <Value
                 value={randomValue}
                 descriptor={values[randomValue]}
+                /**
+                 * @todo Refactor Value component to make these optional props
+                 */
+                lockedValues={lockedValues}
+                setLockedValues={setLockedValues}
               />
               <Stack
                 justifyContent="center"
@@ -261,6 +266,8 @@ function App() {
                   columnTitle={columnTitle}
                   values={columnsTitleToStateMapping[columnTitle].state}
                   columnSetter={columnsTitleToStateMapping[columnTitle].setter}
+                  lockedValues={lockedValues}
+                  setLockedValues={setLockedValues}
                 />
               ))
             }
