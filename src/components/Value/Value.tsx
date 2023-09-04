@@ -1,4 +1,8 @@
+import {
+  useState,
+} from 'react'
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -38,7 +42,22 @@ export default function Value({
   draggable = false,
   onDragStart = null,
   onDragEnd = null,
+  lockedValues,
+  setLockedValues,
 }: ValueProps) {
+  const [ isLocked, setIsLocked ] = useState<boolean>(lockedValues.includes(value));
+  const changeLockstate = () => {
+    setLockedValues(state => {
+      if (isLocked) {
+        // The value exists in the array, remove it
+        setIsLocked(!isLocked);
+        return state.filter(stateValue => stateValue !== value);
+      }
+      setIsLocked(!isLocked);
+      state.push(value);
+      return state;
+    });
+  };
   /**
    * @todo Make fonts look better @_@
    */
@@ -57,6 +76,21 @@ export default function Value({
           <Typography variant="body2">
             {descriptor}
           </Typography>
+          <Button
+             variant="contained"
+             onClick={changeLockstate}
+             color={
+              isLocked
+                ? "error"
+                : "success"
+             }
+          >
+            {
+              isLocked
+                ? lockIcon()
+                : unlockIcon()
+            }
+          </Button>
         </CardContent>
       </Card>
     </Box>
