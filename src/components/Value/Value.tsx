@@ -64,7 +64,7 @@ export default function Value({
   return (
     <Box
       sx={{ minWidth: 275 }}
-      draggable={draggable}
+      draggable={!isLocked}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
