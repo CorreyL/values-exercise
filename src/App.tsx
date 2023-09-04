@@ -90,6 +90,12 @@ function App() {
    */
   const [ randomValue, setRandomValue ] = useState<string>('');
 
+  const saveValuesToLocalStorage = () => {
+    localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
+    localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
+    localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
+  };
+
   useEffect(() => {
     // Remove duplicates
     const initialValues: ValuesAndDescriptors = JSON.parse(JSON.stringify(valuesJson));
@@ -137,11 +143,7 @@ function App() {
           <Button
             variant="contained"
             color="success"
-            onClick={() => {
-              localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
-              localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
-              localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
-            }}
+            onClick={saveValuesToLocalStorage}
           >
             Save Progress
           </Button>
@@ -149,9 +151,7 @@ function App() {
             variant="contained"
             color="success"
             onClick={() => {
-              localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
-              localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
-              localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
+              saveValuesToLocalStorage();
               const jsonToSave = {
                 [columnKeys.VERY_IMPORTANT_VALUES]: veryImportantValues,
                 [columnKeys.IMPORTANT_VALUES]: importantValues,
