@@ -35,6 +35,8 @@ const columnKeys = {
   NOT_IMPORTANT_VALUES: 'notImportantValues',
 };
 
+const lockedValuesKey = 'lockedValues';
+
 /**
  * Delete the chosen Value from the original set of Values and sort it into
  * the chosen Column
@@ -79,6 +81,7 @@ function App() {
   const [ veryImportantValues, setVeryImportantValues ] = useState<ValuesAndDescriptors>({});
   const [ importantValues, setImportantValues ] = useState<ValuesAndDescriptors>({});
   const [ notImportantValues, setNotImportantValues ] = useState<ValuesAndDescriptors>({});
+  const [ lockedValues, setLockedValues ] = useState<Array<string>>([]);
   const columnsTitleToStateMapping = {
     [columns[0]]: { state: veryImportantValues, setter: setVeryImportantValues },
     [columns[1]]: { state: importantValues, setter: setImportantValues },
@@ -94,6 +97,7 @@ function App() {
     localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
     localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
     localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
+    localStorage.setItem(lockedValuesKey, JSON.stringify(lockedValues));
   };
 
   useEffect(() => {
@@ -102,6 +106,10 @@ function App() {
     const removeDuplicates = (value: string) => {
       delete initialValues[value];
     };
+    const savedLockedValues = localStorage.getItem(lockedValuesKey);
+    if (savedLockedValues) {
+      setLockedValues(JSON.parse(savedLockedValues));
+    }
     [
       columnKeys.VERY_IMPORTANT_VALUES,
       columnKeys.IMPORTANT_VALUES,
