@@ -66,10 +66,11 @@ export default function ValuesColumn({
               event.dataTransfer.setData('descriptor', values[value]);
             }}
             onDragEnd={(event: DragEvent) => {
-              /**
-               * @todo Need to determine if it was actually dropped in a
-               * droppable zone, otherwise it'll just get deleted
-               */
+              if (event.dataTransfer.dropEffect === 'none') {
+                // When dataTransfer.dropEffect is 'none', then the element
+                // was not dropped in a drop zone
+                return;
+              }
               columnSetter(state => {
                 const {
                   [value]: valueToDelete,
