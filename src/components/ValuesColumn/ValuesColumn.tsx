@@ -1,4 +1,4 @@
-import { DragEvent, useEffect } from 'react';
+import { DragEvent } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Value from '../Value';
@@ -22,7 +22,6 @@ export default function ValuesColumn({
   lockedValues,
   setLockedValues,
 }: ValuesColumnProps) {
-  useEffect(() => {}, [values]);
   return (
     <Grid
       md={4}
