@@ -17,5 +17,4 @@ by printing the papers and cutting them up, I thought it might be a good excuse 
 
 # Ideas
 
-* History of where Values were moved
-Might help users see which Values they struggled with keeping in a particular column
+Ideas are tracked in this [GitHub Project](https://github.com/users/CorreyL/projects/1/views/1)
