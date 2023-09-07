@@ -1,4 +1,4 @@
-import { DragEvent } from 'react';
+import { DragEvent, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Value from '../Value';
@@ -22,6 +22,7 @@ export default function ValuesColumn({
   lockedValues,
   setLockedValues,
 }: ValuesColumnProps) {
+  const [ droppedSelf, setDroppedSelf ] = useState<boolean>(false);
   return (
     <Grid
       md={4}
@@ -29,6 +30,10 @@ export default function ValuesColumn({
         event.preventDefault();
       }}
       onDrop={(event) => {
+        if (event.dataTransfer.getData('originalcolumn') === columnTitle) {
+          setDroppedSelf(true);
+          return;
+        }
         const value = event.dataTransfer.getData('value');
         const descriptor = event.dataTransfer.getData('descriptor');
         columnSetter(state => ({
@@ -61,11 +66,13 @@ export default function ValuesColumn({
             draggable
             onDragStart={(event: DragEvent) => {
               event.dataTransfer.clearData();
+              setDroppedSelf(false);
+              event.dataTransfer.setData('originalcolumn', columnTitle);
               event.dataTransfer.setData('value', value);
               event.dataTransfer.setData('descriptor', values[value]);
             }}
             onDragEnd={(event: DragEvent) => {
-              if (event.dataTransfer.dropEffect === 'none') {
+              if (event.dataTransfer.dropEffect === 'none' || droppedSelf) {
                 // When dataTransfer.dropEffect is 'none', then the element
                 // was not dropped in a drop zone
                 return;
