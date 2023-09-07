@@ -30,7 +30,6 @@ export default function ValuesColumn({
         event.preventDefault();
       }}
       onDrop={(event) => {
-        event.dataTransfer.setData('droppableZone', 'true');
         const value = event.dataTransfer.getData('value');
         const descriptor = event.dataTransfer.getData('descriptor');
         columnSetter(state => ({
