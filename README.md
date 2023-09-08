@@ -9,7 +9,6 @@ I was recommended the exercise found in [misc/Valuescards.pdf](misc/Valuescards.
 by printing the papers and cutting them up, I thought it might be a good excuse to build it as a small web app to:
 
 * Get my feet wet with [Figma](https://www.figma.com/)
-* Do some project planning ([Linear?](https://linear.app/))
 * Sharpen up my front-end skills
 * Understand where the [React landscape is at in 2023](https://www.robinwieruch.de/react-starter/)
 * Try out a new framework like [Tailwind CSS](https://tailwindcss.com/)
