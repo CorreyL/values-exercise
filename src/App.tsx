@@ -182,6 +182,7 @@ function App() {
             color="success"
             onClick={() => {
               const input = document.createElement('input');
+              input.style.display = 'none';
               input.type = 'file';
               document.body.appendChild(input);
               input.click();
@@ -200,6 +201,7 @@ function App() {
                       setNotImportantValues(parsedLoadedFile[columnKeys.NOT_IMPORTANT_VALUES]);
                       setLockedValues(parsedLoadedFile[lockedValuesKey]);
                     }
+                    input.remove();
                   }
                 }
               };
