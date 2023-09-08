@@ -164,6 +164,7 @@ function App() {
                 [columnKeys.VERY_IMPORTANT_VALUES]: veryImportantValues,
                 [columnKeys.IMPORTANT_VALUES]: importantValues,
                 [columnKeys.NOT_IMPORTANT_VALUES]: notImportantValues,
+                [lockedValuesKey]: lockedValues,
               };
               const element = document.createElement('a');
               const textFile = new Blob([JSON.stringify(jsonToSave)], {type: 'text/plain'});
@@ -197,6 +198,7 @@ function App() {
                       setVeryImportantValues(parsedLoadedFile[columnKeys.VERY_IMPORTANT_VALUES]);
                       setImportantValues(parsedLoadedFile[columnKeys.IMPORTANT_VALUES]);
                       setNotImportantValues(parsedLoadedFile[columnKeys.NOT_IMPORTANT_VALUES]);
+                      setLockedValues(parsedLoadedFile[lockedValuesKey]);
                     }
                   }
                 }
