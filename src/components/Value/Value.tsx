@@ -14,11 +14,8 @@ interface ValueProps {
   draggable?: boolean;
   onDragStart?: any;
   onDragEnd?: any;
-  /**
-   * @todo Refactor Value component to make these optional props
-   */
-  lockedValues: Array<string>,
-  setLockedValues: React.Dispatch<React.SetStateAction<Array<string>>>,
+  lockedValues?: Array<string>,
+  setLockedValues?: React.Dispatch<React.SetStateAction<Array<string>>>,
 };
 
 const unlockIcon = () => {
@@ -46,8 +43,15 @@ export default function Value({
   lockedValues,
   setLockedValues,
 }: ValueProps) {
-  const [ isLocked, setIsLocked ] = useState<boolean>(lockedValues.includes(value));
+  const [ isLocked, setIsLocked ] = useState<boolean>(
+    lockedValues
+      ? lockedValues.includes(value)
+      : false
+  );
   const changeLockstate = () => {
+    if (!setLockedValues) {
+      return;
+    }
     setLockedValues(state => {
       if (isLocked) {
         // The value exists in the array, remove it
@@ -84,21 +88,25 @@ export default function Value({
           <Typography variant="body2">
             {descriptor}
           </Typography>
-          <Button
-             variant="contained"
-             onClick={changeLockstate}
-             color={
+          {
+            lockedValues
+            && setLockedValues
+            && <Button
+              variant="contained"
+              onClick={changeLockstate}
+              color={
               isLocked
                 ? "error"
                 : "success"
-             }
-          >
-            {
-              isLocked
-                ? lockIcon()
-                : unlockIcon()
-            }
-          </Button>
+              }
+            >
+              {
+                isLocked
+                  ? lockIcon()
+                  : unlockIcon()
+              }
+            </Button>
+          }
         </CardContent>
       </Card>
     </Box>

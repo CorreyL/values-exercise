@@ -216,11 +216,6 @@ function App() {
               <Value
                 value={randomValue}
                 descriptor={values[randomValue]}
-                /**
-                 * @todo Refactor Value component to make these optional props
-                 */
-                lockedValues={lockedValues}
-                setLockedValues={setLockedValues}
               />
               <Stack
                 justifyContent="center"
