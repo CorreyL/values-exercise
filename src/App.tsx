@@ -100,8 +100,7 @@ function App() {
     localStorage.setItem(lockedValuesKey, JSON.stringify(lockedValues));
   };
 
-  useEffect(() => {
-    // Remove duplicates
+  const removeDuplicatesAndLoadValues = () => {
     const initialValues: ValuesAndDescriptors = JSON.parse(JSON.stringify(valuesJson));
     const removeDuplicates = (value: string) => {
       delete initialValues[value];
@@ -133,6 +132,10 @@ function App() {
       }
     });
     setValues(initialValues);
+  };
+
+  useEffect(() => {
+    removeDuplicatesAndLoadValues();
   }, []);
 
   useEffect(() => {
