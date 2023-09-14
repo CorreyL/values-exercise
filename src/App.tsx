@@ -1,4 +1,5 @@
 import {
+  createContext,
   useEffect,
   useState,
 } from 'react'
@@ -28,6 +29,11 @@ export const columns: Array<string> = [
   'Important',
   'Not Important',
 ];
+
+export const LockedValuesContext = createContext({
+  lockedValues: [] as Array<string>,
+  setLockedValues: () => {},
+});
 
 const columnKeys = {
   VERY_IMPORTANT_VALUES: 'veryImportantValues',
@@ -263,18 +269,18 @@ function App() {
         }
         <Box>
           <Grid container spacing={2}>
-            {
-              columns.map((columnTitle, idx) => (
-                <ValuesColumn
-                  key={`column-${idx}`}
-                  columnTitle={columnTitle}
-                  values={columnsTitleToStateMapping[columnTitle].state}
-                  columnSetter={columnsTitleToStateMapping[columnTitle].setter}
-                  lockedValues={lockedValues}
-                  setLockedValues={setLockedValues}
-                />
-              ))
-            }
+            <LockedValuesContext.Provider value={{lockedValues, setLockedValues}}>
+              {
+                columns.map((columnTitle, idx) => (
+                  <ValuesColumn
+                    key={`column-${idx}`}
+                    columnTitle={columnTitle}
+                    values={columnsTitleToStateMapping[columnTitle].state}
+                    columnSetter={columnsTitleToStateMapping[columnTitle].setter}
+                  />
+                ))
+              }
+            </LockedValuesContext.Provider>
           </Grid>
         </Box>
       </main>

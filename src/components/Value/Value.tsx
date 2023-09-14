@@ -1,4 +1,5 @@
 import {
+  useContext,
   useState,
 } from 'react'
 import Box from '@mui/material/Box';
@@ -6,6 +7,7 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { LockedValuesContext } from '../../App';
 import './Value.css';
 
 interface ValueProps {
@@ -40,9 +42,12 @@ export default function Value({
   draggable = false,
   onDragStart = null,
   onDragEnd = null,
-  lockedValues,
-  setLockedValues,
 }: ValueProps) {
+  const lockedValuesContext = useContext(LockedValuesContext);
+  const {
+    lockedValues,
+    setLockedValues,
+  } = lockedValuesContext;
   const [ isLocked, setIsLocked ] = useState<boolean>(
     lockedValues
       ? lockedValues.includes(value)
@@ -52,10 +57,18 @@ export default function Value({
     if (!setLockedValues) {
       return;
     }
+    /**
+     * @todo Need to fix Typescript issue for setLockedValues
+     */
+    // @ts-ignore
     setLockedValues(state => {
       if (isLocked) {
         // The value exists in the array, remove it
         setIsLocked(!isLocked);
+        /**
+         * @todo Need to fix Typescript issue for setLockedValues
+         */
+        // @ts-ignore
         return state.filter(stateValue => stateValue !== value);
       }
       setIsLocked(!isLocked);
@@ -90,7 +103,6 @@ export default function Value({
           </Typography>
           {
             lockedValues
-            && setLockedValues
             && <Button
               variant="contained"
               onClick={changeLockstate}
