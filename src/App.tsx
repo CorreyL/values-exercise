@@ -134,6 +134,33 @@ function App() {
     setValues(initialValues);
   };
 
+  const loadProgressFromFile = () => {
+    const input = document.createElement('input');
+    input.style.display = 'none';
+    input.type = 'file';
+    document.body.appendChild(input);
+    input.click();
+    input.onchange = (event) => {
+      const fileReader = new FileReader();
+      if (event?.target && (event.target as HTMLInputElement).files?.length) {
+        // Typescript is not recognizing that event and target have
+        // already been null-checked, begrudgingly ts-ignore
+        // @ts-ignore
+        fileReader.readAsText(event.target.files[0], 'UTF-8');
+        fileReader.onload = (event) => {
+          if (event?.target?.result) {
+            const parsedLoadedFile = JSON.parse(event.target.result as string);
+            setVeryImportantValues(parsedLoadedFile[columnKeys.VERY_IMPORTANT_VALUES]);
+            setImportantValues(parsedLoadedFile[columnKeys.IMPORTANT_VALUES]);
+            setNotImportantValues(parsedLoadedFile[columnKeys.NOT_IMPORTANT_VALUES]);
+            setLockedValues(parsedLoadedFile[lockedValuesKey]);
+          }
+          input.remove();
+        }
+      }
+    };
+  };
+
   useEffect(() => {
     removeDuplicatesAndLoadValues();
   }, []);
@@ -183,32 +210,7 @@ function App() {
           <Button
             variant="contained"
             color="success"
-            onClick={() => {
-              const input = document.createElement('input');
-              input.style.display = 'none';
-              input.type = 'file';
-              document.body.appendChild(input);
-              input.click();
-              input.onchange = (event) => {
-                const fileReader = new FileReader();
-                if (event?.target && (event.target as HTMLInputElement).files?.length) {
-                  // Typescript is not recognizing that event and target have
-                  // already been null-checked, begrudgingly ts-ignore
-                  // @ts-ignore
-                  fileReader.readAsText(event.target.files[0], 'UTF-8');
-                  fileReader.onload = (event) => {
-                    if (event?.target?.result) {
-                      const parsedLoadedFile = JSON.parse(event.target.result as string);
-                      setVeryImportantValues(parsedLoadedFile[columnKeys.VERY_IMPORTANT_VALUES]);
-                      setImportantValues(parsedLoadedFile[columnKeys.IMPORTANT_VALUES]);
-                      setNotImportantValues(parsedLoadedFile[columnKeys.NOT_IMPORTANT_VALUES]);
-                      setLockedValues(parsedLoadedFile[lockedValuesKey]);
-                    }
-                    input.remove();
-                  }
-                }
-              };
-            }}
+            onClick={loadProgressFromFile}
           >
             Load Progress From File
           </Button>
