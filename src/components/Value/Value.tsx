@@ -95,10 +95,17 @@ export default function Value({
         }
       >
         <CardContent>
-          <Typography variant="h5" component="div">
+          <Typography
+            variant="h5"
+            component="div"
+            className="prevent-select"
+          >
             {value}
           </Typography>
-          <Typography variant="body2">
+          <Typography
+            variant="body2"
+            className="prevent-select"
+          >
             {descriptor}
           </Typography>
           {
