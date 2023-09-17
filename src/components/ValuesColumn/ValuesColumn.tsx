@@ -3,6 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Value from '../Value';
 import { columns, ValuesAndDescriptors } from '../../App';
+import './ValuesColumn.css';
 
 interface ValuesColumnProps {
   columnTitle: string,
@@ -34,6 +35,7 @@ export default function ValuesColumn({
           [value]: descriptor,
         }));
       }}
+      className="values-column"
     >
       <Typography variant="h4" component="div">
         {columnTitle} (
