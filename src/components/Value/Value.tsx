@@ -85,6 +85,7 @@ export default function Value({
       draggable={!isLocked}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
+      className="value"
     >
       <Card
         variant="outlined"

@@ -1,3 +1,7 @@
+.value {
+  box-shadow: 5px 5px #323232;
+}
+
 .locked-value {
   background-color: #1F2022 !important;
 }
