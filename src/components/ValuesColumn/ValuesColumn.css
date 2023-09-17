@@ -3,4 +3,7 @@
   flex-direction: column;
   gap: 0.5em;
   background-color: #525252;
+  border: #121212;
+  border-style: solid;
+  border-width: thick;
 }
