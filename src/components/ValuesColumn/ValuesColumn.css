@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  background-color: #525252;
+  background-color: #525252c0;
   border: #121212;
   border-style: solid;
   border-width: thick;
