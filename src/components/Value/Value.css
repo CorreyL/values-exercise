@@ -1,9 +1,9 @@
 .value {
-  box-shadow: 5px 5px #323232;
+  box-shadow: 5px 5px #222222;
 }
 
 .locked-value {
-  background-color: #1F2022 !important;
+  background-color: #191a1b !important;
 }
 
 .prevent-select {
