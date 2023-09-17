@@ -268,7 +268,7 @@ function App() {
           )
         }
         <Box>
-          <Grid container spacing={2}>
+          <Grid container spacing={5} className="values-column-grid">
             <LockedValuesContext.Provider value={{lockedValues, setLockedValues}}>
               {
                 columns.map((columnTitle, idx) => (
