@@ -56,7 +56,7 @@ export default function ValuesColumn({
         )
       </Typography>
       {
-        Object.keys(values).map((value, idx) => (
+        Object.keys(values).reverse().map((value, idx) => (
           <Value
             key={`${columnTitle}-${value}-${idx}`}
             value={value}
