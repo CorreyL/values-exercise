@@ -30,6 +30,9 @@ export default function ValuesColumn({
         }
         const value = event.dataTransfer.getData('value');
         const descriptor = event.dataTransfer.getData('descriptor');
+        if (!value && !descriptor) {
+          return;
+        }
         columnSetter(state => ({
           ...state,
           [value]: descriptor,
