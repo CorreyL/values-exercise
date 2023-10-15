@@ -1,4 +1,6 @@
 import {} from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import { columnKeys, lockedValuesKey } from '../../constants';
 import { ValuesAndDescriptors } from '../../types';
 
@@ -58,4 +60,49 @@ export default function SaveAndLoad(props: SaveAndLoadProps) {
     localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
     localStorage.setItem(lockedValuesKey, JSON.stringify(lockedValues));
   };
+
+  return (
+    <Stack
+      justifyContent="center"
+      direction="row"
+      spacing={2}
+    >
+      <Button
+        variant="contained"
+        color="success"
+        onClick={saveValuesToLocalStorage}
+      >
+        Save Progress
+      </Button>
+      <Button
+        variant="contained"
+        color="success"
+        onClick={() => {
+          saveValuesToLocalStorage();
+          const jsonToSave = {
+            [columnKeys.VERY_IMPORTANT_VALUES]: veryImportantValues,
+            [columnKeys.IMPORTANT_VALUES]: importantValues,
+            [columnKeys.NOT_IMPORTANT_VALUES]: notImportantValues,
+            [lockedValuesKey]: lockedValues,
+          };
+          const element = document.createElement('a');
+          const textFile = new Blob([JSON.stringify(jsonToSave)], {type: 'text/plain'});
+          element.href = URL.createObjectURL(textFile);
+          element.download = 'values.json';
+          document.body.appendChild(element); 
+          element.click();
+          element.remove();
+        }}
+      >
+        Save Progress To File
+      </Button>
+      <Button
+        variant="contained"
+        color="success"
+        onClick={loadProgressFromFile}
+      >
+        Load Progress From File
+      </Button>
+    </Stack>
+  );
 };

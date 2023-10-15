@@ -5,6 +5,7 @@ import {
 } from 'react'
 import Value from './components/Value';
 import ValuesColumn from './components/ValuesColumn';
+import SaveAndLoad from './components/SaveAndLoad/SaveAndLoad';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -83,13 +84,6 @@ function App() {
    */
   const [ randomValue, setRandomValue ] = useState<string>('');
 
-  const saveValuesToLocalStorage = () => {
-    localStorage.setItem(columnKeys.VERY_IMPORTANT_VALUES, JSON.stringify(veryImportantValues));
-    localStorage.setItem(columnKeys.IMPORTANT_VALUES, JSON.stringify(importantValues));
-    localStorage.setItem(columnKeys.NOT_IMPORTANT_VALUES, JSON.stringify(notImportantValues));
-    localStorage.setItem(lockedValuesKey, JSON.stringify(lockedValues));
-  };
-
   const removeDuplicatesAndLoadValues = () => {
     const initialValues: ValuesAndDescriptors = JSON.parse(JSON.stringify(valuesJson));
     const removeDuplicates = (value: string) => {
@@ -124,33 +118,6 @@ function App() {
     setValues(initialValues);
   };
 
-  const loadProgressFromFile = () => {
-    const input = document.createElement('input');
-    input.style.display = 'none';
-    input.type = 'file';
-    document.body.appendChild(input);
-    input.click();
-    input.onchange = (event) => {
-      const fileReader = new FileReader();
-      if (event?.target && (event.target as HTMLInputElement).files?.length) {
-        // Typescript is not recognizing that event and target have
-        // already been null-checked, begrudgingly ts-ignore
-        // @ts-ignore
-        fileReader.readAsText(event.target.files[0], 'UTF-8');
-        fileReader.onload = (event) => {
-          if (event?.target?.result) {
-            const parsedLoadedFile = JSON.parse(event.target.result as string);
-            setVeryImportantValues(parsedLoadedFile[columnKeys.VERY_IMPORTANT_VALUES]);
-            setImportantValues(parsedLoadedFile[columnKeys.IMPORTANT_VALUES]);
-            setNotImportantValues(parsedLoadedFile[columnKeys.NOT_IMPORTANT_VALUES]);
-            setLockedValues(parsedLoadedFile[lockedValuesKey]);
-          }
-          input.remove();
-        }
-      }
-    };
-  };
-
   useEffect(() => {
     removeDuplicatesAndLoadValues();
   }, []);
@@ -163,48 +130,16 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main>
-        <Stack
-          justifyContent="center"
-          direction="row"
-          spacing={2}
-        >
-          <Button
-            variant="contained"
-            color="success"
-            onClick={saveValuesToLocalStorage}
-          >
-            Save Progress
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => {
-              saveValuesToLocalStorage();
-              const jsonToSave = {
-                [columnKeys.VERY_IMPORTANT_VALUES]: veryImportantValues,
-                [columnKeys.IMPORTANT_VALUES]: importantValues,
-                [columnKeys.NOT_IMPORTANT_VALUES]: notImportantValues,
-                [lockedValuesKey]: lockedValues,
-              };
-              const element = document.createElement('a');
-              const textFile = new Blob([JSON.stringify(jsonToSave)], {type: 'text/plain'});
-              element.href = URL.createObjectURL(textFile);
-              element.download = 'values.json';
-              document.body.appendChild(element); 
-              element.click();
-              element.remove();
-            }}
-          >
-            Save Progress To File
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={loadProgressFromFile}
-          >
-            Load Progress From File
-          </Button>
-        </Stack>
+        <SaveAndLoad
+          lockedValues={lockedValues}
+          veryImportantValues={veryImportantValues}
+          importantValues={importantValues}
+          notImportantValues={notImportantValues}
+          setVeryImportantValues={setVeryImportantValues}
+          setImportantValues={setImportantValues}
+          setNotImportantValues={setNotImportantValues}
+          setLockedValues={setLockedValues}
+        />
         {(randomValue !== '')
           && (
             <>
