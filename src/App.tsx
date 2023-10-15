@@ -12,7 +12,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
-import { columnKeys, lockedValuesKey } from './constants';
+import { columns, columnKeys, lockedValuesKey } from './constants';
 import './App.css'
 
 export type ValuesAndDescriptors = {
@@ -24,12 +24,6 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
-
-export const columns: Array<string> = [
-  'Very Important',
-  'Important',
-  'Not Important',
-];
 
 export const LockedValuesContext = createContext({
   lockedValues: [] as Array<string>,

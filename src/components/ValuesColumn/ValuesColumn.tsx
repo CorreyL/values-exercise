@@ -2,7 +2,8 @@ import { DragEvent, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Value from '../Value';
-import { columns, ValuesAndDescriptors } from '../../App';
+import { columns } from '../../constants';
+import { ValuesAndDescriptors } from '../../App';
 import './ValuesColumn.css';
 
 interface ValuesColumnProps {
