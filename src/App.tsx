@@ -12,6 +12,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
+import { columnKeys, lockedValuesKey } from './constants';
 import './App.css'
 
 export type ValuesAndDescriptors = {
@@ -34,14 +35,6 @@ export const LockedValuesContext = createContext({
   lockedValues: [] as Array<string>,
   setLockedValues: () => {},
 });
-
-const columnKeys = {
-  VERY_IMPORTANT_VALUES: 'veryImportantValues',
-  IMPORTANT_VALUES: 'importantValues',
-  NOT_IMPORTANT_VALUES: 'notImportantValues',
-};
-
-const lockedValuesKey = 'lockedValues';
 
 /**
  * Delete the chosen Value from the original set of Values and sort it into
