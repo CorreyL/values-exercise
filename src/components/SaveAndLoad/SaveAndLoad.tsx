@@ -10,7 +10,7 @@ interface SaveAndLoadProps {
   setVeryImportantValues: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>;
   setImportantValues: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>;
   setNotImportantValues: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>;
-  setLockedValues: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>;
+  setLockedValues: React.Dispatch<React.SetStateAction<Array<string>>>;
 };
 
 export default function SaveAndLoad(props: SaveAndLoadProps) {
