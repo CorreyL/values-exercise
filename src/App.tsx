@@ -13,11 +13,8 @@ import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 import valuesJson from './data/values-and-descriptors.json';
 import { columns, columnKeys, lockedValuesKey } from './constants';
+import { ValuesAndDescriptors } from './types';
 import './App.css'
-
-export type ValuesAndDescriptors = {
-  [value: string]: string;
-}
 
 const darkTheme = createTheme({
   palette: {
