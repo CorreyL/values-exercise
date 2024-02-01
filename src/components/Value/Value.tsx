@@ -18,7 +18,7 @@ interface ValueProps {
   onDragEnd?: any;
   lockedValues?: Array<string>,
   setLockedValues?: React.Dispatch<React.SetStateAction<Array<string>>>,
-};
+}
 
 const unlockIcon = () => {
   return (

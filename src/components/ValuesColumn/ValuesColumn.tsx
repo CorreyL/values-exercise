@@ -10,7 +10,7 @@ interface ValuesColumnProps {
   columnTitle: string,
   columnSetter: React.Dispatch<React.SetStateAction<ValuesAndDescriptors>>,
   values: ValuesAndDescriptors,
-};
+}
 
 export default function ValuesColumn({
   columnTitle,
