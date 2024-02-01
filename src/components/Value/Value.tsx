@@ -57,18 +57,10 @@ export default function Value({
     if (!setLockedValues) {
       return;
     }
-    /**
-     * @todo Need to fix Typescript issue for setLockedValues
-     */
-    // @ts-ignore
     setLockedValues(state => {
       if (isLocked) {
         // The value exists in the array, remove it
         setIsLocked(!isLocked);
-        /**
-         * @todo Need to fix Typescript issue for setLockedValues
-         */
-        // @ts-ignore
         return state.filter(stateValue => stateValue !== value);
       }
       setIsLocked(!isLocked);
