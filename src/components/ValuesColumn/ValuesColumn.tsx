@@ -39,6 +39,7 @@ export default function ValuesColumn({
           [value]: descriptor,
         }));
       }}
+      minWidth={'325px'}
       className="values-column"
     >
       <Typography variant="h4" component="div">
