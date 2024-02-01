@@ -153,6 +153,7 @@ function App() {
               <Value
                 value={randomValue}
                 descriptor={values[randomValue]}
+                inColumn={false}
               />
               <Stack
                 justifyContent="center"

@@ -14,6 +14,7 @@ import './Value.css';
 interface ValueProps {
   value: string;
   descriptor: string;
+  inColumn?: boolean;
   draggable?: boolean;
   onDragStart?: (event: DragEvent<Element>) => void;
   onDragEnd?: (event: DragEvent<Element>) => void;
@@ -42,6 +43,7 @@ export default function Value({
   descriptor,
   onDragStart,
   onDragEnd,
+  inColumn = true,
 }: ValueProps) {
   const lockedValuesContext = useContext(LockedValuesContext);
   const {
@@ -103,6 +105,7 @@ export default function Value({
           </Typography>
           {
             lockedValues
+            && inColumn
             && <Button
               variant="contained"
               onClick={changeLockstate}
