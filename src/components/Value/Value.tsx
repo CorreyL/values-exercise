@@ -1,4 +1,5 @@
 import {
+  DragEvent,
   useContext,
   useState,
 } from 'react'
@@ -14,8 +15,8 @@ interface ValueProps {
   value: string;
   descriptor: string;
   draggable?: boolean;
-  onDragStart?: any;
-  onDragEnd?: any;
+  onDragStart?: (event: DragEvent<Element>) => void;
+  onDragEnd?: (event: DragEvent<Element>) => void;
   lockedValues?: Array<string>,
   setLockedValues?: React.Dispatch<React.SetStateAction<Array<string>>>,
 }
@@ -39,8 +40,8 @@ const lockIcon = () => {
 export default function Value({
   value,
   descriptor,
-  onDragStart = null,
-  onDragEnd = null,
+  onDragStart,
+  onDragEnd,
 }: ValueProps) {
   const lockedValuesContext = useContext(LockedValuesContext);
   const {

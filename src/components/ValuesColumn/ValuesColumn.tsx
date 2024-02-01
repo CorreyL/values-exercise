@@ -63,14 +63,14 @@ export default function ValuesColumn({
             value={value}
             descriptor={values[value]}
             draggable
-            onDragStart={(event: DragEvent) => {
+            onDragStart={(event: DragEvent<Element>) => {
               event.dataTransfer.clearData();
               setDroppedSelf(false);
               event.dataTransfer.setData('originalcolumn', columnTitle);
               event.dataTransfer.setData('value', value);
               event.dataTransfer.setData('descriptor', values[value]);
             }}
-            onDragEnd={(event: DragEvent) => {
+            onDragEnd={(event: DragEvent<Element>) => {
               if (event.dataTransfer.dropEffect === 'none' || droppedSelf) {
                 // When dataTransfer.dropEffect is 'none', then the element
                 // was not dropped in a drop zone
