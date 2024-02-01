@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import Value from '../Value';
 import { columns } from '../../constants';
-import { ValuesAndDescriptors } from '../../App';
+import { ValuesAndDescriptors } from '../../types';
 import './ValuesColumn.css';
 
 interface ValuesColumnProps {
