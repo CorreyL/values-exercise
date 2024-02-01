@@ -39,7 +39,6 @@ const lockIcon = () => {
 export default function Value({
   value,
   descriptor,
-  draggable = false,
   onDragStart = null,
   onDragEnd = null,
 }: ValueProps) {
