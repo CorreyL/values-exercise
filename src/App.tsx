@@ -1,7 +1,9 @@
 import {
   createContext,
+  Dispatch,
   useEffect,
   useState,
+  SetStateAction,
 } from 'react'
 import Value from './components/Value';
 import ValuesColumn from './components/ValuesColumn';
@@ -23,7 +25,12 @@ const darkTheme = createTheme({
   },
 });
 
-export const LockedValuesContext = createContext({
+interface LockedValuesContextInterface {
+  lockedValues: Array<string>;
+  setLockedValues: Dispatch<SetStateAction<Array<string>>>
+}
+
+export const LockedValuesContext = createContext<LockedValuesContextInterface>({
   lockedValues: [] as Array<string>,
   setLockedValues: () => {},
 });
